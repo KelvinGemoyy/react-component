@@ -41,22 +41,23 @@ const animesData = [
 ];
 
 export default function App() {
+  const [animes, setAnimes] = useState(animesData);
  
 
   return (
     <>
-      <Navbar />
-      <Main />
+      <Navbar animes={animes}/>
+      <Main animes={animes} />
     </>
   );
 }
  
-function Navbar () {
+function Navbar ({ animes }) {
 
   return (
     <nav className="nav-bar">
       <Logo />
-      <Search />
+      <Search animes={animes}/>
     </nav>
   )
 }
@@ -71,20 +72,20 @@ function Logo() {
   )
 }
 
-function Search() {
+function Search({ animes }) {
 
   return (
     <div className="search-container">
       <Input />
-      <NumResult />
+      <NumResult animes={animes} />
     </div>
   );
 }
 
-function NumResult() {
+function NumResult({ animes }) {
   return (
   <p className="search-results">
-    Found <strong>4</strong> results
+    Found <strong>{animes.length}</strong> results
   </p>
   )
 }
@@ -97,8 +98,7 @@ function Input() {
   )
 }
 
-function Main () {
-  const [animes, setAnimes] = useState(animesData);
+function Main ({ animes }) {
   const [selectedAnime, setSelectedAnime] = useState(animes[0]);
  
 
